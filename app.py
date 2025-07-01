@@ -4,6 +4,7 @@ import re
 from PIL import Image
 import io  # 메모리 처리를 위한 라이브러리
 import base64 # PDF 미리보기를 위한 라이브러리
+import fitz # PyMuPDF: PDF 페이지를 이미지로 변환하기 위함
 
 # --- PDF 생성 로직 (기능 추가) ---
 
@@ -224,10 +225,17 @@ if "pdf_data" in st.session_state:
         file_name=st.session_state.pdf_name, mime="application/pdf", use_container_width=True
     )
     
+    # PDF 미리보기 기능 수정 (더 안정적인 이미지 미리보기 방식)
     with st.container():
-        st.subheader("📄 PDF 미리보기")
-        base64_pdf = base64.b64encode(st.session_state.pdf_data).decode('utf-8')
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="1000" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
+        st.subheader("📄 첫 페이지 미리보기")
+        try:
+            pdf_doc = fitz.open(stream=st.session_state.pdf_data, filetype="pdf")
+            first_page = pdf_doc.load_page(0)
+            pix = first_page.get_pixmap(dpi=150) # 미리보기 이미지 해상도 설정
+            img_bytes = pix.tobytes("png")
+            st.image(img_bytes)
+        except Exception as e:
+            st.error(f"PDF 미리보기를 생성하는 중 오류가 발생했습니다: {e}")
+
 
 # streamlit run app.py
