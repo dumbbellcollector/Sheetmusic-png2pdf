@@ -2,9 +2,7 @@
 
 여러 개의 PNG 이미지 파일을 하나의 A4 사이즈 PDF 문서로 변환해주는 간단하고 강력한 웹 애플리케이션입니다. Streamlit을 사용하여 제작되었습니다.
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([https://your-app-url.streamlit.app](https://sheetmusic-png2pdf-hmheeu3c62wa2bemmyoyoa.streamlit.app/
-)) 
-> *배포 후 위 링크를 실제 Streamlit 앱 주소로 변경하세요.*
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([https://your-app-url.streamlit.app](https://sheetmusic-png2pdf-hmheeu3c62wa2bemmyoyoa.streamlit.app/) 
 
 ---
 
